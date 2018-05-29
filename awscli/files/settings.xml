@@ -1,0 +1,42 @@
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+                      http://maven.apache.org/xsd/settings-1.0.0.xsd">
+  <mirrors>
+    <mirror>
+      <id>maven-public</id>
+      <name>About Maven Respository</name>
+      <url>http://nexus.prod.aws.about.com/repository/maven-public</url>
+      <mirrorOf>*</mirrorOf>
+    </mirror>
+  </mirrors>
+
+  <profiles>
+    <profile>
+      <id>snapshots</id>
+      <repositories>
+        <repository>
+          <id>maven-snapshots</id>
+          <url>http://nexus.prod.aws.about.com/repository/maven-snapshots</url>
+          <releases><enabled>false</enabled></releases>
+          <snapshots><enabled>true</enabled></snapshots>
+        </repository>
+      </repositories>
+    </profile>
+     <profile>
+      <id>releases</id>
+      <repositories>
+        <repository>
+          <id>maven-releases</id>
+          <url>http://nexus.prod.aws.about.com/repository/maven-releases</url>
+          <releases><enabled>true</enabled></releases>
+          <snapshots><enabled>false</enabled></snapshots>
+        </repository>
+      </repositories>
+    </profile>
+  </profiles>
+  <activeProfiles>
+    <activeProfile>snapshots</activeProfile>
+    <activeProfile>releases</activeProfile>
+  </activeProfiles>
+</settings>

@@ -1,0 +1,18 @@
+---
+# tasks file for roles/awscli
+- name: install yum packages
+  yum: name="{{ item }}" state=present
+  with_items:
+   - python-pip
+ 
+- name: AWSCLI | install latest awscli package 
+  pip: name=awscli state=latest
+
+- name: BOTO3 | install latest boto package
+  pip: name=boto3 state=latest
+
+- name: PIP | install latest aws-shell package
+  pip: name=aws-shell state=latest
+
+- name: PIP | install latest ansible package
+  pip: name=ansible state=latest

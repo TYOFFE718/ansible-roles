@@ -1,0 +1,14 @@
+---
+# tasks file for roles/java
+- name: JAVA | Installing OpenJDK
+  yum:
+    name: "java-{{ item }}-openjdk"
+    state: present
+  become: true
+  with_items:
+    - "{{ openjdk_version }}"
+
+#- name: JAVA | Set java to "{{ openjdk_version }}"
+#  alternatives:
+#    name: java
+#    path: /usr/lib/jvm/jre-{{ openjdk_version }}-openjdk.x86_64/bin/java

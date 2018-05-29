@@ -1,0 +1,29 @@
+---
+# tasks file for httpd
+- name: HTTPD | install httpd
+  yum:
+    name="{{ item }}" state=latest
+  with_items:
+    - httpd
+
+- name: HTTPD | copy audiomack.conf file
+  copy:
+    src: "{{ role_path }}/files/audiomack.conf"
+    dest: /etc/httpd/conf.d/audiomack.conf
+    mode: 0644
+    owner: apache
+    group: apache
+
+- name: HTTPD | Create /var/www/audiomack/public
+  file:
+    path: /var/www/audiomack/public
+    owner: root
+    group: root
+    mode: 0644
+    state: directory
+
+- name: HTTPD | enable service at boot and start service
+  service:
+    name: httpd
+    state: started
+    enabled: yes

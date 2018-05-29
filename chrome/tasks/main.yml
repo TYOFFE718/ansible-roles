@@ -1,0 +1,4 @@
+---
+
+- name: CHROME | Install chrome browser
+  raw: curl https://intoli.com/install-google-chrome.sh | bash
