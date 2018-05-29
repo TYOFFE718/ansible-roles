@@ -1,0 +1,4 @@
+---
+# defaults file for new-relic
+nrinfragent_state:       "latest"
+nrinfragent_version:     "*"

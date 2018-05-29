@@ -1,0 +1,66 @@
+---
+# tasks file for linux-utils
+- name: ACK | Install ACK
+  raw: "curl https://beyondgrep.com/ack-2.22-single-file > /usr/bin/ack && chmod 0755 /usr/bin/ack"
+
+- name: EPEL| Add EPEL-RELEASE repository
+  command: yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+  args:
+    creates: /etc/yum.repos.d/epel.repo
+
+- name: REMI | Add REMI repository
+  command: yum install -y http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+  args:
+    creates: /etc/yum.repos.d/remi.repo
+ 
+- name: LINUX-UTILS | install yum packages
+  yum: name="{{ item }}" state=present
+  with_items:
+   - gcc
+   - python-devel
+   - libffi-devel
+   - openssl-devel
+   - wget
+   - git
+   - bind-utils
+   - zip
+   - diffutils
+   - re2c
+   - bc
+   - sendmail
+   - net-tools
+   - jq
+   - libxml2
+   - libxml2-devel
+   - libxslt
+   - libxslt-devel
+   - GraphicsMagick
+   - GraphicsMagick-devel
+   - ImageMagick
+   - ImageMagick-devel
+   - perl-Image-ExifTool
+
+- name: LINUX-UTILS | set maxfiles in sysctl
+  sysctl:
+    name: fs.file-max
+    sysctl_set: yes
+    value: 64000
+
+- name: LINUX-UTILS | set soft limit for users
+  pam_limits:
+    domain: "{{ item }}"
+    limit_type: soft
+    limit_item: nofile
+    value: 64000
+  with_items:
+      - ec2-user
+
+- name: LINUX-UTILS | set hard limit for users
+  pam_limits:
+    domain: "{{ item }}"
+    limit_type: hard
+    limit_item: nofile
+    value: 64000
+  with_items:
+    - ec2-user
+    - redis

@@ -1,0 +1,38 @@
+---
+# tasks file for new-relic
+- name: NEWRELIC | setup agent repo keys
+  rpm_key:
+    key: https://download.newrelic.com/infrastructure_agent/gpg/newrelic-infra.gpg
+    state: present
+
+- name: NEWRELIC | Install repo
+  command: rpm -Uvh http://yum.newrelic.com/pub/newrelic/el5/x86_64/newrelic-repo-5-3.noarch.rpm
+  args:
+    creates: /etc/yum.repos.d/newrelic.repo
+
+- name: NEWRELIC | install agent
+  yum:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+    #enablerepo: New-Relic-Infrastructure
+  with_items:
+    - newrelic-php5
+
+- name: NEWRELIC | setup agent config
+  copy:
+    src: nrsysmond.cfg
+    dest: /etc/newrelic/nrsysmond.cfg
+    mode: 0600
+
+- name: NEWRELIC | setup ini
+  copy:
+    src: newrelic.ini
+    dest: /etc/php.d/newrelic.ini
+    mode: 0600
+
+- name: NEWRELIC | enable servie at boot and start service
+  service:
+    name: newrelic-daemon
+    state: started
+    enabled: yes

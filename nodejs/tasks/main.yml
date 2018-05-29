@@ -1,0 +1,13 @@
+---
+
+- name: Upgrade nodejs  v8
+  shell: | 
+    yum remove nodesource* nodejs yarn
+    curl --location https://rpm.nodesource.com/setup_8.x | sudo bash -
+    rm -rf /var/cache/yum/x86_64/latest/nodesource/
+    yum --disablerepo=epel -y install nodejs npm
+    npm install -g pm2
+
+
+
+
