@@ -1,0 +1,5 @@
+# From https://github.com/antirez/redis-hashes
+# Generate with:
+# $ curl -s https://raw.githubusercontent.com/antirez/redis-hashes/master/README | gawk '/^hash/ { print gensub(/redis-(.*)\.tar\.gz/, "\\1", "g", $2) ": " $4 }'
+redis_checksums:
+  4.0.9: df4f73bc318e2f9ffb2d169a922dec57ec7c73dd07bccf875695dbeecd5ec510
