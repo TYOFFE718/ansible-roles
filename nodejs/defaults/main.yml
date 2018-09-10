@@ -1,5 +1,0 @@
----
-# defaults file for nodejs
-nodejs_version: "8.11.1"
-nodejs_global_packages: [ ]
-nodejs_source_url_base: "https://rpm.nodesource.com"
