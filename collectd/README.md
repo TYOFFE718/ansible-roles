@@ -79,19 +79,5 @@ $ mkdir roles
 $ ln -frs ../../PROJECT_DIR roles/collectd
 ```
 
-You may want to change the base box into one that you like. The current one is based on Box-Cutter's [CentOS Packer template](https://github.com/boxcutter/centos).
 
-The playbook [`test.yml`](tests/test.yml) applies the role to a VM, setting role variables.
-
-## Contributing
-
-Issues, feature requests, ideas are appreciated and can be posted in the Issues section. Pull requests are also very welcome. Preferably, create a topic branch and when submitting, squash your commits into one (with a descriptive message).
-
-## License
-
-BSD
-
-## Author Information
-
-Bert Van Vreckem (bert.vanvreckem@gmail.com)
 
